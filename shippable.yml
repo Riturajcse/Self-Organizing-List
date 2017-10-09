@@ -1,0 +1,7 @@
+language: go
+
+build:
+
+  ci:
+    - echo "Starting test cases"
+    - go test
