@@ -7,10 +7,4 @@ build:
 
   ci:
     - echo "Starting test cases"
-    - which go
-    - echo $GOROOT
-    - echo $GOPATH
-    - ls
-    - pwd
-    - make init
-    - go get -v ./...
+    - go test.
