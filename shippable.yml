@@ -7,4 +7,4 @@ build:
 
   ci:
     - echo "Starting test cases"
-    - go test.
+    - go test
