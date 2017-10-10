@@ -2,6 +2,8 @@
 
 [![Run Status](https://api.shippable.com/projects/59dba4fb183eb3070005b779/badge?branch=master)](https://app.shippable.com/github/Riturajcse/Self-Organizing-List)
 
+[![github license](https://img.shields.io/github/license/Riturajcse/Self-Organizing-List.svg)](https://github.com/Riturajcse/Self-Organizing-List)
+
 This is a library implementing Self Organizing List for the Go programming language (http://golang.org/).
 
 A self-organizing list is a list that reorders its elements based on some self-organizing heuristic to improve average access time.The aim of a self-organizing list is to improve efficiency of linear search by moving more frequently accessed items towards the head of the list. A self-organizing list achieves near constant time for element access in the best case. A self-organizing list uses a reorganizing algorithm to adapt to various query distributions at runtime.
