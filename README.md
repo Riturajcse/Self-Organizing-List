@@ -70,7 +70,7 @@ func main() {
     tlist.Find(1)
     tlist.PrintList() //prints 3 1 2
     
-    clist := selflist.NewList(selflist.Transpose)
+    clist := selflist.NewList(selflist.Counter)
     clist.Prepend(1)
     clist.Prepend(2)
     clist.Prepend(3)
