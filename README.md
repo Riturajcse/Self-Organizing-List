@@ -43,3 +43,42 @@ This technique involves swapping an accessed node with its predecessor.
                      swap item i with item (i - 1)
            
 ```
+
+## Installing
+```
+go get github.com/Riturajcse/Self-Organizing-List
+```
+
+## Example
+```
+package main
+
+import selflist "github.com/Riturajcse/Self-Organizing-List"
+
+func main() {
+    mlist := selflist.NewList(selflist.MTF)
+    mlist.Prepend(1)
+    mlist.Prepend(2)
+    mlist.Prepend(3)
+    mlist.Find(1)
+    mlist.PrintList() //prints 1 3 2
+    
+    tlist := selflist.NewList(selflist.Transpose)
+    tlist.Prepend(1)
+    tlist.Prepend(2)
+    tlist.Prepend(3)
+    tlist.Find(1)
+    tlist.PrintList() //prints 3 1 2
+    
+    clist := selflist.NewList(selflist.Transpose)
+    clist.Prepend(1)
+    clist.Prepend(2)
+    clist.Prepend(3)
+    clist.Find(2)
+    clist.Find(2)
+    clist.PrintList() //prints 2 3 1
+}
+
+```
+
+
