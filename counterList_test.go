@@ -8,10 +8,10 @@ func TestCounterPrepend(t *testing.T) {
 	cList.Prepend(1)
 	cList.Prepend(2)
 	curr := cList.head
-	for i := 2; curr != nil; curr, i = curr.next, i - 1  {
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
 		if curr.value != i {
 			t.Error("Failing to Prepend in Counter List. Expecting: ", i, " got: ", curr.value)
-		} 
+		}
 	}
 }
 
@@ -21,10 +21,10 @@ func TestCounterAppend(t *testing.T) {
 	cList.Append(1)
 	cList.Append(2)
 	curr := cList.head
-	for i := 0; curr != nil; curr, i = curr.next, i + 1  {
+	for i := 0; curr != nil; curr, i = curr.next, i+1 {
 		if curr.value != i {
 			t.Error("Failing to Append in Counter List. Expecting: ", i, " got: ", curr.value)
-		} 
+		}
 	}
 }
 
@@ -44,7 +44,7 @@ func TestCounterFind(t *testing.T) {
 	cList.Find(1)
 	cList.Find(1)
 	curr := cList.head
-	// Expected output based on number of counters is 2 3 1 0 
+	// Expected output based on number of counters is 2 3 1 0
 	if curr.value != 2 {
 		t.Error("Failed to follow Counter List criteria. Expecting: ", 2, " got: ", curr.value)
 	} else if curr.next.value != 3 {

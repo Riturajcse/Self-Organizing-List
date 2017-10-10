@@ -1,16 +1,19 @@
 package selfOrganizingList
 
-import ("testing")
+import (
+	"testing"
+)
+
 func TestTransposePrepend(t *testing.T) {
 	tList := &transposeList{}
 	tList.Prepend(0)
 	tList.Prepend(1)
 	tList.Prepend(2)
 	curr := tList.head
-	for i := 2; curr != nil; curr, i = curr.next, i - 1  {
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
 		if curr.value != i {
 			t.Error("Failing to Prepend in Transpose List. Expecting: ", i, " got: ", curr.value)
-		} 
+		}
 	}
 }
 
@@ -20,10 +23,10 @@ func TestTransposeAppend(t *testing.T) {
 	tList.Append(1)
 	tList.Append(2)
 	curr := tList.head
-	for i := 0; curr != nil; curr, i = curr.next, i + 1  {
+	for i := 0; curr != nil; curr, i = curr.next, i+1 {
 		if curr.value != i {
 			t.Error("Failing to Append in Transpose List. Expecting: ", i, " got: ", curr.value)
-		} 
+		}
 	}
 }
 
@@ -35,7 +38,7 @@ func TestTransposeFind(t *testing.T) {
 	tList.Append(3)
 	tList.Find(3)
 	tList.Find(3)
-    tList.Find(2)
+	tList.Find(2)
 	tList.Find(1)
 	curr := tList.head
 	// Expected output is 0 3 1 2
