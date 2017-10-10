@@ -1,6 +1,7 @@
 # Self Organizing List in Go
 
 [![Run Status](https://api.shippable.com/projects/59dba4fb183eb3070005b779/badge?branch=master)](https://app.shippable.com/github/Riturajcse/Self-Organizing-List)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Riturajcse/Self-Organizing-List)](https://goreportcard.com/report/github.com/Riturajcse/Self-Organizing-List)
 [![github license](https://img.shields.io/github/license/Riturajcse/Self-Organizing-List.svg)](https://github.com/Riturajcse/Self-Organizing-List)
 
 This is a library implementing Self Organizing List for the Go programming language (http://golang.org/).
