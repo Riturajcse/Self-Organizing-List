@@ -47,7 +47,6 @@ func (sl *counterList) Find (find int) int {
   }
   for i := 0;curr != nil; curr, i = curr.next, i + 1 {
     if curr.value == find {
-      // here we are incrementing the counter and then calling rearrange function to rearrange the node
       curr.counter = curr.counter + 1
       sl.reArrange(curr, find)
       return i
