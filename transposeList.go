@@ -36,6 +36,22 @@ func (sl *transposeList) Append(value int) {
 	curr.next = n
 }
 
+func (sl *transposeList) MoveAfter(value int, after int) {
+	if value == after {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	afterNode := sl.getNode(after)
+	if valueNode == nil || afterNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	valueNode.next = afterNode.next
+	afterNode.next = valueNode
+}
+
 func (sl *transposeList) Find(find int) int {
 	if sl.head == nil {
 		return -1
@@ -63,6 +79,34 @@ func (sl *transposeList) transpose(transNode *transposeNode) {
 	tempData := prev.value
 	prev.value = curr.value
 	curr.value = tempData
+}
+
+func (sl *transposeList) delElement(del int) {
+	curr := sl.head
+	if sl.head == nil {
+		return
+	}
+	if curr.value == del {
+		sl.head = curr.next
+		return
+	}
+
+	for ; curr.next != nil; curr = curr.next {
+		if curr.next.value == del {
+			curr.next = curr.next.next
+			break
+		}
+	}
+}
+
+func (sl *transposeList) getNode(value int) *transposeNode {
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr
+		}
+	}
+
+	return nil
 }
 
 func (sl *transposeList) PrintList() {

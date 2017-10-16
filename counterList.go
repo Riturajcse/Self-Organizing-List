@@ -37,6 +37,22 @@ func (sl *counterList) Append(value int) {
 	curr.next = n
 }
 
+func (sl *counterList) MoveAfter(value int, after int) {
+	if value == after {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	afterNode := sl.getNode(after)
+	if valueNode == nil || afterNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	valueNode.next = afterNode.next
+	afterNode.next = valueNode
+}
+
 func (sl *counterList) Find(find int) int {
 	if sl.head == nil {
 		return -1
@@ -92,6 +108,16 @@ func (sl *counterList) delElement(del int) {
 			break
 		}
 	}
+}
+
+func (sl *counterList) getNode(value int) *counterNode {
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr
+		}
+	}
+
+	return nil
 }
 
 func (sl *counterList) PrintList() {

@@ -36,6 +36,22 @@ func (sl *mtfList) Append(value int) {
 	curr.next = n
 }
 
+func (sl *mtfList) MoveAfter(value int, after int) {
+	if value == after {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	afterNode := sl.getNode(after)
+	if valueNode == nil || afterNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	valueNode.next = afterNode.next
+	afterNode.next = valueNode
+}
+
 func (sl *mtfList) Find(find int) int {
 	if sl.head == nil {
 		return -1
@@ -70,6 +86,16 @@ func (sl *mtfList) delElement(del int) {
 			break
 		}
 	}
+}
+
+func (sl *mtfList) getNode(value int) *mtfNode {
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr
+		}
+	}
+
+	return nil
 }
 
 func (sl *mtfList) PrintList() {
