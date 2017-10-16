@@ -82,8 +82,7 @@ func (sl *counterList) delElement(del int) {
 		return
 	}
 	if curr.value == del {
-		curr = nil
-		sl.head = curr
+		sl.head = curr.next
 		return
 	}
 
