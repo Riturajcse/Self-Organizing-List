@@ -73,6 +73,13 @@ func (sl *mtfList) MoveBefore(value int, before int) {
 	prevBeforeNode.next = valueNode
 }
 
+func (sl *mtfList) MoveToBack(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Append(value)
+	}
+}
+
 func (sl *mtfList) Find(find int) int {
 	if sl.head == nil {
 		return -1

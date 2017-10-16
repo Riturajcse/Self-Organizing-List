@@ -64,6 +64,22 @@ func TestMtfMoveBefore(t *testing.T) {
 	}
 }
 
+func TestMtfMoveToBack(t *testing.T) {
+	mList := &mtfList{}
+	mList.Append(0)
+	mList.Append(1)
+	mList.Append(2)
+	mList.MoveToBack(1)
+	mList.MoveToBack(0)
+	mList.MoveToBack(3) // Invalid value to move shouldn't do anything
+	curr := mList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveToBack in MTF List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
 func TestMtfFind(t *testing.T) {
 	mList := &mtfList{}
 	mList.Append(0)
