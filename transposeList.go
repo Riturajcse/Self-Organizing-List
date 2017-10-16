@@ -80,6 +80,13 @@ func (sl *transposeList) MoveToBack(value int) {
 	}
 }
 
+func (sl *transposeList) MoveToFront(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Prepend(value)
+	}
+}
+
 func (sl *transposeList) Find(find int) int {
 	if sl.head == nil {
 		return -1

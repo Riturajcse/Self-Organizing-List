@@ -80,6 +80,22 @@ func TestCounterMoveToBack(t *testing.T) {
 	}
 }
 
+func TestCounterMoveToFront(t *testing.T) {
+	cList := &counterList{}
+	cList.Append(0)
+	cList.Append(1)
+	cList.Append(2)
+	cList.MoveToFront(1)
+	cList.MoveToFront(2)
+	cList.MoveToFront(3) // Invalid value to move shouldn't do anything
+	curr := cList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveToFront in Counter List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
 func TestCounterFind(t *testing.T) {
 	cList := &counterList{}
 	cList.Append(0)

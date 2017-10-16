@@ -80,6 +80,13 @@ func (sl *mtfList) MoveToBack(value int) {
 	}
 }
 
+func (sl *mtfList) MoveToFront(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Prepend(value)
+	}
+}
+
 func (sl *mtfList) Find(find int) int {
 	if sl.head == nil {
 		return -1

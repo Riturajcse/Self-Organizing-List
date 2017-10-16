@@ -81,6 +81,13 @@ func (sl *counterList) MoveToBack(value int) {
 	}
 }
 
+func (sl *counterList) MoveToFront(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Prepend(value)
+	}
+}
+
 func (sl *counterList) Find(find int) int {
 	if sl.head == nil {
 		return -1
