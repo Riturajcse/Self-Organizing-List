@@ -48,6 +48,24 @@ func TestTransposeMoveAfter(t *testing.T) {
 	}
 }
 
+func TestTransposeMoveBefore(t *testing.T) {
+	tList := &transposeList{}
+	tList.Append(0)
+	tList.Append(1)
+	tList.Append(2)
+	tList.MoveBefore(2, 0)
+	tList.MoveBefore(1, 0)
+	tList.MoveBefore(1, 1) // Same value shouldn't do anything
+	tList.MoveBefore(3, 1) // Invalid value to move shouldn't do anything
+	tList.MoveBefore(1, 3) // Invalid before value shouldn't do anything
+	curr := tList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveBefore in Transpose List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
 func TestTransposeFind(t *testing.T) {
 	tList := &transposeList{}
 	tList.Append(0)

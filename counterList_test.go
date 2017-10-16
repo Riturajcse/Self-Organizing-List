@@ -46,6 +46,24 @@ func TestCounterMoveAfter(t *testing.T) {
 	}
 }
 
+func TestCounterMoveBefore(t *testing.T) {
+	cList := &counterList{}
+	cList.Append(0)
+	cList.Append(1)
+	cList.Append(2)
+	cList.MoveBefore(2, 0)
+	cList.MoveBefore(1, 0)
+	cList.MoveBefore(1, 1) // Same value shouldn't do anything
+	cList.MoveBefore(3, 1) // Invalid value to move shouldn't do anything
+	cList.MoveBefore(1, 3) // Invalid before value shouldn't do anything
+	curr := cList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveBefore in Counter List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
 func TestCounterFind(t *testing.T) {
 	cList := &counterList{}
 	cList.Append(0)
