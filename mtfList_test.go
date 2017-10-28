@@ -28,6 +28,74 @@ func TestMtfAppend(t *testing.T) {
 	}
 }
 
+func TestMtfMoveAfter(t *testing.T) {
+	mList := &mtfList{}
+	mList.Append(0)
+	mList.Append(1)
+	mList.Append(2)
+	mList.MoveAfter(0, 2)
+	mList.MoveAfter(1, 2)
+	mList.MoveAfter(1, 1) // Same value shouldn't do anything
+	mList.MoveAfter(3, 1) // Invalid value to move shouldn't do anything
+	mList.MoveAfter(1, 3) // Invalid after value shouldn't do anything
+	curr := mList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveAfter in MTF List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
+func TestMtfMoveBefore(t *testing.T) {
+	mList := &mtfList{}
+	mList.Append(0)
+	mList.Append(1)
+	mList.Append(2)
+	mList.MoveBefore(2, 0)
+	mList.MoveBefore(1, 0)
+	mList.MoveBefore(1, 1) // Same value shouldn't do anything
+	mList.MoveBefore(3, 1) // Invalid value to move shouldn't do anything
+	mList.MoveBefore(1, 3) // Invalid before value shouldn't do anything
+	curr := mList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveBefore in MTF List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
+func TestMtfMoveToBack(t *testing.T) {
+	mList := &mtfList{}
+	mList.Append(0)
+	mList.Append(1)
+	mList.Append(2)
+	mList.MoveToBack(1)
+	mList.MoveToBack(0)
+	mList.MoveToBack(3) // Invalid value to move shouldn't do anything
+	curr := mList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveToBack in MTF List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
+func TestMtfMoveToFront(t *testing.T) {
+	mList := &mtfList{}
+	mList.Append(0)
+	mList.Append(1)
+	mList.Append(2)
+	mList.MoveToFront(1)
+	mList.MoveToFront(2)
+	mList.MoveToFront(3) // Invalid value to move shouldn't do anything
+	curr := mList.head
+	for i := 2; curr != nil; curr, i = curr.next, i-1 {
+		if curr.value != i {
+			t.Error("Failing to MoveToFront in MTF List. Expecting: ", i, " got: ", curr.value)
+		}
+	}
+}
+
 func TestMtfFind(t *testing.T) {
 	mList := &mtfList{}
 	mList.Append(0)

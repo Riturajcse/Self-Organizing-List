@@ -36,6 +36,57 @@ func (sl *mtfList) Append(value int) {
 	curr.next = n
 }
 
+func (sl *mtfList) MoveAfter(value int, after int) {
+	if value == after {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	afterNode := sl.getNode(after)
+	if valueNode == nil || afterNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	valueNode.next = afterNode.next
+	afterNode.next = valueNode
+}
+
+func (sl *mtfList) MoveBefore(value int, before int) {
+	if value == before {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	beforeNode, prevBeforeNode := sl.getNodeWithPrevious(before)
+	if valueNode == nil || beforeNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	if prevBeforeNode == nil {
+		sl.Prepend(valueNode.value)
+		return
+	}
+
+	valueNode.next = beforeNode
+	prevBeforeNode.next = valueNode
+}
+
+func (sl *mtfList) MoveToBack(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Append(value)
+	}
+}
+
+func (sl *mtfList) MoveToFront(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Prepend(value)
+	}
+}
+
 func (sl *mtfList) Find(find int) int {
 	if sl.head == nil {
 		return -1
@@ -60,8 +111,7 @@ func (sl *mtfList) delElement(del int) {
 		return
 	}
 	if curr.value == del {
-		curr = nil
-		sl.head = curr
+		sl.head = curr.next
 		return
 	}
 
@@ -71,6 +121,28 @@ func (sl *mtfList) delElement(del int) {
 			break
 		}
 	}
+}
+
+func (sl *mtfList) getNode(value int) *mtfNode {
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr
+		}
+	}
+
+	return nil
+}
+
+func (sl *mtfList) getNodeWithPrevious(value int) (*mtfNode, *mtfNode) {
+	var prev *mtfNode
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr, prev
+		}
+		prev = curr
+	}
+
+	return nil, nil
 }
 
 func (sl *mtfList) PrintList() {

@@ -36,6 +36,57 @@ func (sl *transposeList) Append(value int) {
 	curr.next = n
 }
 
+func (sl *transposeList) MoveAfter(value int, after int) {
+	if value == after {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	afterNode := sl.getNode(after)
+	if valueNode == nil || afterNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	valueNode.next = afterNode.next
+	afterNode.next = valueNode
+}
+
+func (sl *transposeList) MoveBefore(value int, before int) {
+	if value == before {
+		return
+	}
+
+	valueNode := sl.getNode(value)
+	beforeNode, prevBeforeNode := sl.getNodeWithPrevious(before)
+	if valueNode == nil || beforeNode == nil {
+		return
+	}
+
+	sl.delElement(valueNode.value)
+	if prevBeforeNode == nil {
+		sl.Prepend(valueNode.value)
+		return
+	}
+
+	valueNode.next = beforeNode
+	prevBeforeNode.next = valueNode
+}
+
+func (sl *transposeList) MoveToBack(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Append(value)
+	}
+}
+
+func (sl *transposeList) MoveToFront(value int) {
+	if find := sl.getNode(value); find != nil {
+		sl.delElement(value)
+		sl.Prepend(value)
+	}
+}
+
 func (sl *transposeList) Find(find int) int {
 	if sl.head == nil {
 		return -1
@@ -63,6 +114,46 @@ func (sl *transposeList) transpose(transNode *transposeNode) {
 	tempData := prev.value
 	prev.value = curr.value
 	curr.value = tempData
+}
+
+func (sl *transposeList) delElement(del int) {
+	curr := sl.head
+	if sl.head == nil {
+		return
+	}
+	if curr.value == del {
+		sl.head = curr.next
+		return
+	}
+
+	for ; curr.next != nil; curr = curr.next {
+		if curr.next.value == del {
+			curr.next = curr.next.next
+			break
+		}
+	}
+}
+
+func (sl *transposeList) getNode(value int) *transposeNode {
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr
+		}
+	}
+
+	return nil
+}
+
+func (sl *transposeList) getNodeWithPrevious(value int) (*transposeNode, *transposeNode) {
+	var prev *transposeNode
+	for curr := sl.head; curr != nil; curr = curr.next {
+		if curr.value == value {
+			return curr, prev
+		}
+		prev = curr
+	}
+
+	return nil, nil
 }
 
 func (sl *transposeList) PrintList() {
