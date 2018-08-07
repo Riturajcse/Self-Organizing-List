@@ -5,5 +5,5 @@ go:
 
 build:
   ci:
-    - echo "Starting test cases"
+    - echo "Starting test cases now"
     - go test
